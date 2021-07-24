@@ -14,12 +14,15 @@ my_img_06 = ImageTk.PhotoImage(Image.open("img/blossom-04.jpg"))
 
 image_list = [my_img_01, my_img_02, my_img_03, my_img_04, my_img_05, my_img_06]
 
+status = Label(root, text="Image 1 of " + str(len(image_list)) + "  ", bd=1, relief=SUNKEN, anchor=E)
+
 my_label = Label(image=my_img_01)
 my_label.grid(row=0, column=0, columnspan=3)
 
 
 def forward(image_number):
     global my_label
+    global status
     global button_forward
     global button_back
 
@@ -35,9 +38,14 @@ def forward(image_number):
     button_back.grid(row=1, column=0)
     button_forward.grid(row=1, column=2)
 
+    status = Label(root, text="Image " + str(image_number) + " of " + str(len(image_list)) + "  ", bd=1, relief=SUNKEN,
+                   anchor=E)
+    status.grid(row=2, column=0, columnspan=3, padx=15, pady=10, sticky=W + E)
+
 
 def back(image_number):
     global my_label
+    global status
     global button_forward
     global button_back
 
@@ -53,6 +61,10 @@ def back(image_number):
     button_back.grid(row=1, column=0)
     button_forward.grid(row=1, column=2)
 
+    status = Label(root, text="Image " + str(image_number) + " of " + str(len(image_list)) + "  ", bd=1, relief=SUNKEN,
+                   anchor=E)
+    status.grid(row=2, column=0, columnspan=3, padx=15, pady=10, sticky=W + E)
+
 
 button_back = Button(root, text="<<", command=back, state=DISABLED)
 button_quit = Button(root, text="Exit Program", padx=10, pady=5, command=root.quit)
@@ -60,6 +72,7 @@ button_forward = Button(root, text=">>", command=lambda: forward(2))
 
 button_back.grid(row=1, column=0)
 button_quit.grid(row=1, column=1)
-button_forward.grid(row=1, column=2)
+button_forward.grid(row=1, column=2, pady=10)
+status.grid(row=2, column=0, columnspan=3, padx=15, pady=10, sticky=W+E)
 
 root.mainloop()
